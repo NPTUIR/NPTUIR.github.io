@@ -10,20 +10,20 @@
     <script src="bootstrap.js"></script>
 </head>
 <body style="background-color: #afd9ee">
-    <div id="elf" style="display: block; position: fixed;top:200px;right:10px;border:dotted black 1px;margin: 5px 5px;padding: 5px 5px;background-color: #ccffcc">
+    <div id="elf" style="display: block; position: fixed;top:200px;right:1px;border:dotted black 1px;margin: 5px 5px;padding: 5px 5px;background-color: #ccffcc">
         <div>
             <p style="text-align:center;" onclick="elf_close()">-close-</p>
-            <a href="" style="font-size: 15px;"><span class="glyphicon glyphicon-wrench">錯誤回報</span></a><br>
+            <a href="https://forms.gle/SKnACvV4qgkPPJZM7" target="_blank" style="font-size: 15px;"><span class="glyphicon glyphicon-wrench">錯誤回報</span></a><br>
             <a href="" style="font-size: 15px;"><span class="glyphicon glyphicon-pencil">回饋表單</span></a>
             <!--<button onclick="close()">關閉</button>  收起來-->
         </div>
     </div>
-    <div id="elf-hidden" style="height: 40px; display: none; position: fixed;top:200px;right:10px;border:dotted black 1px;margin: 5px 5px;background-color: #ccffcc">
+    <div id="elf-hidden" style="height: 40px; display: none; position: fixed;top:200px;right:1px;border:dotted black 1px;margin: 5px 5px;background-color: #ccffcc">
         <p style="text-align:center; line-height: 40px;" onclick="elf_open()">-open-</p>
     </div>
     <!--作者跟前言 導覽列-->
     <header>
-        <div class="title">
+        <div class="title" style="margin: 0 auto;text-align: center">
             <h1 class="name">
             <font>用生成式AI把草圖轉為較真實的圖片</font>
             </h1>
@@ -33,6 +33,8 @@
             <h6>
                 <font>指導老師：楊柏遠 助理教授</font>
             </h6>
+        </div>
+        <div>
             <nav class="navbar navbar-default">
                 <div class="navbar-header">
                 <span href="#" class="navbar-brand">關於此專題</span>
@@ -74,7 +76,7 @@
             <div>
                 <h3><font>Abstract</font></h3>
             </div>
-            <div class="abstract" style="padding: 15px 5px">
+            <div class="abstract" style="padding: 15px 5px;width: 80%;text-align: justify;margin: 0 auto;border: 1px">
                 <font>
                     生成式AI是目前全世界皆致力於研究的一個方向，得益於深度學習之類神經網路的技術，此技術得以從分析圖片等任務延伸至生成圖片等應用。
                     變分自編碼器 (Variational Autoencoder, VAE)、生成對抗網路 (Generate Adversarial Network, GAN)、去噪擴散機率模型 (Denoise Diffusion Probability Model, DDPM)都是生成圖片的應用中較常使用的工具。
@@ -114,7 +116,7 @@
     </div>
     <!--使用方法-->
     <!--程式主體-->
-    <div>
+    <div style="text-align:center; margin:0 auto;">
         <h5>
             <font>Used Model: </font>
             <font class="used-model"></font>
@@ -127,11 +129,11 @@
                 <option>CDDPM</option>
             </select>
         </h5>
-        <div name="sketch-data" style="width: 256px; height: 300px; margin:0 auto;">
+        <div name="sketch-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
             <button onclick="load_SketchImage()">Load Sketch Image</button>
             <canvas id="sketch-data" width="256" height="256"></canvas>
         </div>
-        <div name="real-data" style="width: 256px; height: 300px; margin:0 auto;">
+        <div name="real-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
             <button onclick="transfer_RealImage()"><!--<img src="圖片網址">-->Transform Real Image</button>
             <canvas id="real-data" width="256" height="256"></canvas>
         </div>
@@ -171,11 +173,6 @@
         5.摘要可以用動態浮現的形式表現<br>
         6.要檢查在chrome跟safari的結果一樣 排版不要跑掉<br>
         7.icon<br>
-        8.沒選生成模型要跳警告視窗<br>
     </font>
 </body>
 </html>
-            
-              
-           
-     
