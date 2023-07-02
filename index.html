@@ -8,10 +8,17 @@
     <script src="jquery.js"></script>
     <script src="bootstrap.js"></script>
 </head>
-<body>
-    <div id="elf" style="position: fixed;top:45px;right:10px;border:dotted black 1px;margin: 15px 5px;padding: 5px 15px;background-color: #ccffcc">
-        <a href=""><span class="glyphicon glyphicon-wrench">錯誤回報</span></a><br>
-        <a href=""><span class="glyphicon glyphicon-pencil">回饋表單</span></a>
+<body style="background-color: #afd9ee">
+    <div id="elf" style="display: block; position: fixed;top:200px;right:10px;border:dotted black 1px;margin: 5px 5px;padding: 5px 5px;background-color: #ccffcc">
+        <div>
+            <p style="text-align:center;" onclick="elf_close()">-close-</p>
+            <a href="" style="font-size: 15px;"><span class="glyphicon glyphicon-wrench">錯誤回報</span></a><br>
+            <a href="" style="font-size: 15px;"><span class="glyphicon glyphicon-pencil">回饋表單</span></a>
+            <!--<button onclick="close()">關閉</button>  收起來-->
+        </div>
+    </div>
+    <div id="elf-hidden" style="height: 40px; display: none; position: fixed;top:200px;right:10px;border:dotted black 1px;margin: 5px 5px;background-color: #ccffcc">
+        <p style="text-align:center; line-height: 40px;" onclick="elf_open()">-open-</p>
     </div>
     <!--作者跟前言 導覽列-->
     <header>
@@ -119,11 +126,15 @@
                 <option>CDDPM</option>
             </select>
         </h5>
-        <!-- 建立下拉式選單 把值賦予上方class等於used-model-->
-        <canvas id="sketch-data" width="256" height="256"></canvas>
-        <button onclick="load_SketchImage()">Load Sketch Image</button>
-        <button onclick="transfer_RealImage()">Transform Real Image</button>
-        <canvas id="real-data" width="256" height="256"></canvas>
+        <div name="sketch-data" style="width: 256px; height: 300px; margin:0 auto;">
+            <button onclick="load_SketchImage()">Load Sketch Image</button>
+            <canvas id="sketch-data" width="256" height="256"></canvas>
+        </div>
+        <div name="real-data" style="width: 256px; height: 300px; margin:0 auto;">
+            <button onclick="transfer_RealImage()"><!--<img src="圖片網址">-->Transform Real Image</button>
+            <canvas id="real-data" width="256" height="256"></canvas>
+        </div>
+
     <hr size="2px" align="center" width="100%">
     </div>
     <!--使用後的表單？-->
@@ -163,3 +174,7 @@
     </font>
 </body>
 </html>
+            
+              
+           
+     
