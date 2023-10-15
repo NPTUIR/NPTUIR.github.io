@@ -8,6 +8,10 @@
     <link href="bootstrap.css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="bootstrap.js"></script>
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4/dist/mobilenet.min.js"></script>-->
+
 </head>
 <body style="background-color: #afd9ee">
     <div id="elf" style="display: block; position: fixed;top:200px;right:1px;border:dotted black 1px;margin: 5px 5px;padding: 5px 5px;background-color: #ccffcc">
@@ -130,11 +134,12 @@
             </select>
         </h5>
         <div name="sketch-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
-            <button onclick="load_SketchImage()">Load Sketch Image</button>
+            <input id="fileInput" type="file" accept="image/*" style="display: none;">
+            <button onclick="load_SketchImage()">Random Load Sketch Image</button>
             <canvas id="sketch-data" width="256" height="256"></canvas>
         </div>
         <div name="real-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
-            <button onclick="transfer_RealImage()"><!--<img src="圖片網址">-->Transform Real Image</button>
+            <button onclick="transfer_RealImage()"><!--<img src="圖片網址">-->Transform Real Image</button><!--transfer_RealImage()-->
             <canvas id="real-data" width="256" height="256"></canvas>
         </div>
 
@@ -174,5 +179,6 @@
         6.要檢查在chrome跟safari的結果一樣 排版不要跑掉<br>
         7.icon<br>
     </font>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
 </body>
 </html>
