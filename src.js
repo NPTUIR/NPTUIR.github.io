@@ -1,10 +1,4 @@
-// import * as tf from '@tensorflow/tfjs';
-// async function init(){
-//     pix2pix_model= await tf.loadLayersModel('./model/pix2pix_generator/model.json');
-//     console.log('load model...');
-// }
-// const pix2pix_model = await tf.loadLayersModel('./model/pix2pix_model/model.json');
-// alert('load!');
+
 
 function elf_close(){
     const x = document.getElementById('elf');
@@ -39,7 +33,6 @@ function load_SketchImage(){
 async function transfer_RealImage(){
     const canvas = document.getElementById('real-data');
     const context = canvas.getContext('2d');
-    const RealImage = context.createImageData(canvas.width, canvas.height);
     var UsedModel = document.getElementById('selected-model').value;
     if (UsedModel==='請選擇生成模型'){
         alert('請選擇生成模型');
@@ -48,11 +41,23 @@ async function transfer_RealImage(){
         const imgElement = document.getElementById('sketch-data');
         const tfImg = tf.browser.fromPixels(imgElement, 3);
         let tensor = tfImg.reshape([1, 256, 256, 3]);
-        tensor=tensor.div(tf.scalar(255));
+        tensor = tensor.div(tf.scalar(255));
         try{
-            pix2pix_model = await tf.loadLayersModel('./model/pix2pix_model/model.json');
-            const pred = pix2pix_model.predict(tensor);
-            context.putImageData(pred, 0, 0);
+            const pix2pix_model = await tf.loadLayersModel('./model/pix2pix_generator/model.json');//Functional 改成 Model
+            let pred = pix2pix_model.predict(tensor);
+            pred = pred.add(tf.scalar(1)).mul(tf.scalar(127.5));
+            const data = pred.dataSync();
+            const uint8Data = new Uint8ClampedArray(data);
+            const alphaData = new Uint8ClampedArray(uint8Data.length / 3 * 4).fill(255);
+            const rgbaData = new Uint8ClampedArray(uint8Data.length / 3 * 4);
+            for (let i = 0; i < uint8Data.length / 3; i++) {
+                rgbaData[i * 4] = uint8Data[i * 3];
+                rgbaData[i * 4 + 1] = uint8Data[i * 3 + 1];
+                rgbaData[i * 4 + 2] = uint8Data[i * 3 + 2];
+                rgbaData[i * 4 + 3] = alphaData[i * 4 + 3];
+            }
+            const imageData = new ImageData(rgbaData, 256, 256);
+            context.putImageData(imageData, 0, 0);
         }
         catch (error) {
             var blob = new Blob([error], {type: "text/plain;charset=utf-8"});
