@@ -72,16 +72,6 @@ async function transfer_RealImage(){
     }
     else{
         alert(UsedModel);
-        //tensorflow.js load .h5 predict img
-        for (let i = 0; i < RealImage.data.length; i += 4) {
-              const randomValue = Math.floor(Math.random() * 256);
-              RealImage.data[i] = randomValue;
-              RealImage.data[i + 1] = randomValue;
-              RealImage.data[i + 2] = randomValue;
-              RealImage.data[i + 3] = 255;
-            }
-        //
-        context.putImageData(RealImage, 0, 0);
     }
 
 }
