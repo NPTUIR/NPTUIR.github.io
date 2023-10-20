@@ -43,8 +43,11 @@ async function transfer_RealImage(){
         let tensor = tfImg.reshape([1, 256, 256, 3]);
         tensor = tensor.div(tf.scalar(255));
         try{
+            alert('123');
             const pix2pix_model = await tf.loadLayersModel('./model/pix2pix_generator/model.json');//Functional 改成 Model
+            alert('123');
             let pred = pix2pix_model.predict(tensor);
+            alert('123');
             pred = pred.add(tf.scalar(1)).mul(tf.scalar(127.5));
             const data = pred.dataSync();
             const uint8Data = new Uint8ClampedArray(data);
