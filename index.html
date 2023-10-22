@@ -1,184 +1,457 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sketch2Real</title>
     <script type="text/javascript" src="src.js"></script>
-    <link href="bootstrap.css" rel="stylesheet">
-    <script src="jquery.js"></script>
-    <script src="bootstrap.js"></script>
+    <link rel="icon" href="./docs/icon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<!--    <link href="bootstrap.css" rel="stylesheet">-->
 
-<!--    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4/dist/mobilenet.min.js"></script>-->
-
+<!--    <script src="jquery.js"></script>-->
+<!--    <script src="bootstrap.js"></script>-->
 </head>
 <body style="background-color: #afd9ee">
-    <div id="elf" style="display: block; position: fixed;top:200px;right:1px;border:dotted black 1px;margin: 5px 5px;padding: 5px 5px;background-color: #ccffcc">
-        <div>
-            <p style="text-align:center;" onclick="elf_close()">-close-</p>
-            <a href="https://forms.gle/SKnACvV4qgkPPJZM7" target="_blank" style="font-size: 15px;"><span class="glyphicon glyphicon-wrench">錯誤回報</span></a><br>
-            <a href="" style="font-size: 15px;"><span class="glyphicon glyphicon-pencil">回饋表單</span></a>
-            <!--<button onclick="close()">關閉</button>  收起來-->
-        </div>
-    </div>
-    <div id="elf-hidden" style="height: 40px; display: none; position: fixed;top:200px;right:1px;border:dotted black 1px;margin: 5px 5px;background-color: #ccffcc">
-        <p style="text-align:center; line-height: 40px;" onclick="elf_open()">-open-</p>
-    </div>
     <!--作者跟前言 導覽列-->
-    <header>
+    <div class="card" style="text-align:center; margin:0 auto; background: #afd9ee">
         <div class="title" style="margin: 0 auto;text-align: center">
             <h1 class="name">
-            <font>不同生成模型應用於圖像翻譯任務之比較與探討 成果預覽網頁</font>
+                不同生成模型應用於圖像翻譯任務之比較與探討 成果預覽網頁
             </h1>
             <h6 class="author">
-                <font>作者：機器人四甲--陳冠霖、謝昕諺、何杰懋、莊佩蓁</font>
+                作者：機器人四甲 - 陳冠霖、謝昕諺、何杰懋、莊佩蓁
             </h6>
             <h6>
-                <font>指導老師：楊柏遠 助理教授</font>
+                指導老師：楊柏遠 助理教授
             </h6>
         </div>
+    </div>
+    <header>
         <div>
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                <span href="#" class="navbar-brand">關於此專題</span>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">關於此專題</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="TrainingResult" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                訓練結果
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal">CDDIM (陳冠霖)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal">CGAN (莊佩蓁)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal">CVAE (謝昕諺)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal">CycleGAN (何杰懋)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal">Pix2Pix (陳冠霖)</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="AboutusDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                關於我們
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>指導教授</li>
+                                    <li><a class="dropdown-item" href="https://intersci.nptu.edu.tw/p/404-1113-159607.php?Lang=zh-tw" target="_blank">楊柏遠 助理教授</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>組長</li>
+<!--                                    <li><a class="dropdown-item" href="mailto:ken54787845@gmail.com" target="_blank">陳冠霖 CBD109035</a></li>-->
+                                    <li><a class="dropdown-item" href="https://scholar.google.com.tw/citations?user=56m2uDUAAAAJ&hl=zh-TW&authuser=2" target="_blank">陳冠霖 CBD109035</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>組員</li>
+                                    <li><span class="dropdown-item">謝昕諺 CBD109023</span></li> <!-- mailto:sun0956238038@gmail.com -->
+                                    <li><span class="dropdown-item">何杰懋 CBD109019</span></li> <!-- mailto:jack0971437276@gmail.com -->
+                                    <li><span class="dropdown-item">莊佩蓁 CBD109031</span></li> <!-- mailto:winnie43210@gmail.com -->
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                使用的模型
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>原始論文</li>
+                                <li><a class="dropdown-item" href="https://arxiv.org/abs/1611.07004" target="_blank">Pix2Pix</a></li>
+                                <li><a class="dropdown-item" href="https://arxiv.org/abs/1411.1784" target="_blank">CGAN</a></li>
+                                <li><a class="dropdown-item" href="https://arxiv.org/abs/1703.10593" target="_blank">CycleGAN</a></li>
+                                <li><a class="dropdown-item" href="https://arxiv.org/abs/1312.6114" target="_blank">VAE</a></li>
+                                <li><a class="dropdown-item" href="https://arxiv.org/abs/2010.02502" target="_blank">DDIM</a></li>
+                                <li><hr class="dropdown-divider"></li> <!-- 水平線 -->
+                                <li>在成果報告的部分</li>
+                              </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="OtherDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                其他
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="./docs/pdf/112.pdf" target="_blank">專題報告完整文章 (pdf)</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="https://forms.gle/xjD1N8Zz9Htnf5xdA" target="_blank">回饋表單</a></li>
+                                    <li><a class="dropdown-item" href="https://forms.gle/SKnACvV4qgkPPJZM7" target="_blank">錯誤回報</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="mailto:ken54787845@gmail.com">寫信提問</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">專案Github</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-                <div id="mynav" class="navbar-collapse collapse">
-                    <ul class="navbar-nav nav">
-                        <li><a href="#"><span class="glyphicon glyphicon-edit">訓練結果</span></a></li>
-                        <li><a href="#address-me"><span class="glyphicon glyphicon-education">關於我們</span></a></li>
-                        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pushpin"></span>使用的模型<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <!--paper-->
-                                <li><font><span class="glyphicon glyphicon-folder-open">原始論文</span></font></li>
-                                <li><a href="https://arxiv.org/abs/1611.07004" target="_blank"><span class="glyphicon glyphicon-file">Pix2Pix</span></a></li>
-                                <li><a href="https://arxiv.org/abs/1411.1784"><span class="glyphicon glyphicon-file">CGAN</span></a></li>
-                                <li><a href="https://arxiv.org/abs/1703.10593"><span class="glyphicon glyphicon-file">CycleGAN</span></a></li>
-                                <li><a href="https://arxiv.org/abs/1312.6114"><span class="glyphicon glyphicon-file">VAE</span></a></li>
-                                <li><a href="https://arxiv.org/abs/2006.11239"><span class="glyphicon glyphicon-file">DDPM</span></a></li>
-<!--                                <li class="divider"></li>-->
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-info-sign"></span>其他<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-console">專案Github</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                <form class="d-flex" method="get" action="https://www.google.com/search">
+                    <input class="form-control me-2" name="q" type="search" placeholder="從Google搜尋" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </nav>
         </div>
     </header>
-    <div>
-        <div class="introduction">
-            <div>
-                <h3><font>Abstract</font></h3>
+    <div class="accordion accordion-flush" id="Introduction">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="Abstract">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                摘要
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="Abstract" data-bs-parent="#Introduction">
+              <div class="accordion-body">
+                  人工智慧與深度學習已然是目前科技發展的趨勢。在這之中，生成式AI 的發展日新月異，從圖像生成、影片生成、聲音訊號生成、到聊天機器人等，都是各種不同的生成式 AI 所延伸出來的應用。生成式 AI 中又以圖像生成為最廣泛發展的領域。本專題研究分別應用不同的生成模型在圖像
+                  翻譯，並比較他們之間的效能差異；圖像翻譯是以一張圖片作為輸入，而後生成另一張不同風格的圖片。本研究使用生成對抗網路、變分自動編碼器與擴散模型作為生成模型，並進一步地研究探討這些模型應用於圖像翻譯的能力以及優缺點。<br><br>
+                  <strong>關鍵字：</strong>生成式 AI、圖像翻譯、生成對抗網路、擴散模型
+              </div>
             </div>
-            <div class="abstract" style="padding: 15px 5px;width: 80%;text-align: justify;margin: 0 auto;border: 1px">
-                <font>
-                    生成式AI是目前全世界皆致力於研究的一個方向，得益於深度學習之類神經網路的技術，此技術得以從分析圖片等任務延伸至生成圖片等應用。
-                    變分自編碼器 (Variational Autoencoder, VAE)、生成對抗網路 (Generate Adversarial Network, GAN)、去噪擴散機率模型 (Denoise Diffusion Probability Model, DDPM)都是生成圖片的應用中較常使用的工具。
-                    <font style="color:red">
-                        (要加一些介紹的廢話)
-                    </font>
-                    目前生成式AI雖然發展迅速，但訓練的模型成本也大到難以想像，故本研究會針對時下較熱門的生成模型進行比較。著重於比較不同生成模型的效能，以及生成圖片的品質。
-                    研究中我們的出了以下結果：
-                    <font style="color:red">
-                        (要加研究結果)
-                    </font>
-                    最後我們創建了一個網頁供使用者體驗試用本研究所使用的模型以及訓練成果。雖然模型生成的圖片雖然無法達到完美，但也可以分別觀察到不同模型的結果。
-                    總得來說，
-                    <font style="color:red">
-                        (要加最終結論。)
-                    </font>
-                </font>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="Abstract-en">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Abstract
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="Abstract-en" data-bs-parent="#Introduction">
+              <div class="accordion-body">
+                  Artificial intelligence (AI) and deep learning are currently the prevailing trends in technological development. Among these, generative AI has rapidly advanced, with various applications such as image generation, video generation,
+                  sound signal generation, and chatbots. Image generation is the most extensively developed field in generative AI. This project employs different generative models for image translation and compares their performance differences. Image translation involves taking an image as an input and generating another image
+                  with a distinct style. This research employs Generative Adversarial Network (GAN), Variational Auto-Encoder (VAE), and Diffusion Models as generative models. The study further investigates the abilities and advantages and disadvantages of these models as they are applied to image translation.<br><br>
+                  <strong>Keyword: </strong>generative AI, image translation, generative adversarial networks, diffusion model
+              </div>
             </div>
-            <hr size="2px" align="center" width="100%">
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="Conclusion">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseTwo">
+                總結以及未來展望
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="Conclusion" data-bs-parent="#Introduction">
+              <div class="accordion-body">
+                  實驗尚未結束，目前實驗結果尚無完整定論，故暫且留空
+              </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="how-to-use">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+                使用方法
+              </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="how-to-use" data-bs-parent="#Introduction">
+              <div class="accordion-body">
+                  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      </div>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img src="docs/manual/page1.png" class="d-block w-100 h-100" alt="圖片載入中..." style="margin:0 auto">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="docs/manual/page2.png" class="d-block w-100 h-100" alt="圖片載入中..." style="margin:0 auto">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="docs/manual/page3.png" class="d-block w-100 h-100" alt="圖片載入中..." style="margin:0 auto">
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                  </div>
+              </div>
+            </div>
         </div>
     </div>
     <!--作者跟前言 導覽列-->
     <!--使用方法-->
-    <div>
-        <div class="how-to-use">
-            <h3>
-                <font>使用方法</font>
-            </h3>
-            <font>
-                1.選擇圖片 (Load Sketch Image)<br>
-                2.按下轉換 (Transform Real Image)<br>
-                可以根據需求更改使用模型。<br>
-            </font>
-            <font class="to-do" style="color:red">根據情況再加</font>
-            <hr size="2px" align="center" width="100%">
-        </div>
-    </div>
-    <!--使用方法-->
     <!--程式主體-->
     <div style="text-align:center; margin:0 auto;">
-        <h5>
-            <font>Used Model: </font>
-            <font class="used-model"></font>
-            <select id="selected-model">
-                <option>請選擇生成模型</option>
-                <option>Pix2Pix</option>
-                <option>CGAN</option>
-                <option>CycleGAN</option>
-                <option>VAE</option>
-                <option>CDDPM</option>
+        <div class="form-floating">
+            <select class="form-select" aria-label="Default select example" id="selected-model">
+              <option selected value="請選擇生成模型">請選擇要使用的生成模型</option>
+              <option value="Pix2Pix">Pix2Pix</option>
+              <option value="CGAN">CGAN</option>
+              <option value="CycleGAN">CycleGAN</option>
+              <option value="VAE">VAE</option>
+              <option value="CDDIM">CDDIM</option>
             </select>
-        </h5>
-        <div name="sketch-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
-            <input id="fileInput" type="file" accept="image/*" style="display: none;">
-            <button onclick="load_SketchImage()">Random Load Sketch Image</button>
-            <canvas id="sketch-data" width="256" height="256"></canvas>
-        </div>
-        <div name="real-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
-            <button onclick="transfer_RealImage()"><!--<img src="圖片網址">-->Transform Real Image</button><!--transfer_RealImage()-->
-            <canvas id="real-data" width="256" height="256"></canvas>
+            <label for="selected-model">目前使用的模型</label>
         </div>
 
-    <hr size="2px" align="center" width="100%">
+        <div class="card" style="width: 18rem;text-align:center; margin:0 auto;">
+          <div class="card-header">
+            圖片轉換
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div name="real-data" style="text-align:center; width: 256px; margin:0 auto;">
+                    <button type="button" class="btn btn-light" onclick="load_SketchImage()">隨機載入草圖</button>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div name="sketch-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
+                    <input id="fileInput" type="file" accept="image/*" style="display: none;">
+                    <canvas id="sketch-data" width="256" height="256"></canvas>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div name="real-data" style="text-align:center; width: 256px; margin:0 auto;">
+                    <button type="button" class="btn btn-light" onclick="transfer_RealImage()"><!--<img src="圖片網址">-->轉換為精緻圖片</button><!--transfer_RealImage()-->
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div name="real-data" style="text-align:center; width: 256px; height: 300px; margin:0 auto;">
+                    <canvas id="real-data" width="256" height="256"></canvas>
+                </div>
+            </li>
+          </ul>
+        </div>
+
+
+
+<!--    <hr size="2px" align="center" width="100%">-->
     </div>
-    <!--使用後的表單？-->
-    <div>
-        <a href="">回饋表單</a>
-        <font style="color:red">
-            表單題目待想
-        </font>
-        <hr size="2px" align="center" width="100%">
+    <div class="card text-center">
+      <div class="card-body">
+        <footer class="card-text">&copy; 屏東大學智慧機器人學系四甲 專題報告</footer><br>
+        <a class="btn btn-primary" href="" target="_blank">回饋表單</a>
+        <a class="btn btn-primary" href="https://bootstrap5.hexschool.com/docs/5.0/getting-started/introduction/" target="_blank">陳冠霖開發網頁用的參考資料</a>
+
+      </div>
     </div>
-    <!--聯絡我們-->
-    <div>
-        <footer>
-            <address id="address-me">聯絡我們</address>
-            <a href="mailto:ken54787845@gmail.com">陳冠霖</a>
-            <font>,</font>
-            <a href="mailto:sun0956238038@gmail.com">謝昕諺</a>
-            <font>,</font>
-            <a href="mailto:jack0971437276@gmail.com">何杰懋</a>
-            <font>,</font>
-            <a href="mailto:winnie43210@gmail.com">莊佩蓁</a><br>
-            <font>&copy; 屏東大學智慧機器人學系四甲 專題報告</font>
-        </footer>
+
+    <!-- 訓練結果pix2pix -->
+    <div class="modal fade" id="TrainingResult-Pix2Pix" tabindex="-1" aria-labelledby="Pix2PixModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Pix2PixModalLabel">Pix2Pix訓練結果</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card" style="width: 18rem; margin:0 auto;">
+                  <div class="card-header">
+                    Pix2Pix訓練結果
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Pix2Pix的訓練結果如下...</li>
+                    <li class="list-group-item">內文 (訓練變化 影片)</li>
+                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                  </ul>
+                  <div class="card-footer">
+                    <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-Pix2Pix" data-bs-toggle="dropdown" aria-expanded="false">
+                        其他模型訓練成果
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-Pix2Pix">
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <!--備忘錄-->
-    <br><br>
-    <font style="color:red">
-        --備忘錄--<br>
-        1.加入圖片框架 (外框)!<br>
-        2.模型選擇可以用下拉式選單!<br>
-        3.加入水平線分隔區域<br>
-        4.美術排版 css!<br>
-        5.摘要可以用動態浮現的形式表現<br>
-        6.要檢查在chrome跟safari的結果一樣 排版不要跑掉<br>
-        7.icon<br>
-    </font>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
+    <!-- 訓練結果pix2pix -->
+    <!-- 訓練結果cgan -->
+    <div class="modal fade" id="TrainingResult-CGAN" tabindex="-1" aria-labelledby="CGAN-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="CGAN-ModalLabel">CGAN訓練結果</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card" style="width: 18rem; margin:0 auto;">
+                  <div class="card-header">
+                    CGAN訓練結果
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">CGAN的訓練結果如下...</li>
+                    <li class="list-group-item">內文 (訓練變化 影片)</li>
+                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                  </ul>
+                  <div class="card-footer">
+                    <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-CGAN" data-bs-toggle="dropdown" aria-expanded="false">
+                        其他模型訓練成果
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-CGAN">
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訓練結果cgan -->
+    <!-- 訓練結果cyclegan -->
+    <div class="modal fade" id="TrainingResult-CycleGAN" tabindex="-1" aria-labelledby="CycleGAN-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="CycleGAN-ModalLabel">CycleGAN訓練結果</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card" style="width: 18rem; margin:0 auto;">
+                  <div class="card-header">
+                    CycleGAN訓練結果
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">CycleGAN的訓練結果如下...</li>
+                    <li class="list-group-item">內文 (訓練變化 影片)</li>
+                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                  </ul>
+                  <div class="card-footer">
+                    <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-CycleGAN" data-bs-toggle="dropdown" aria-expanded="false">
+                        其他模型訓練成果
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-CycleGAN">
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訓練結果cyclegan -->
+    <!-- 訓練結果cvae -->
+    <div class="modal fade" id="TrainingResult-CVAE" tabindex="-1" aria-labelledby="CVAE-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="CVAE-ModalLabel">CVAE訓練結果</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card" style="width: 18rem; margin:0 auto;">
+                  <div class="card-header">
+                    CVAE訓練結果
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">CVAE的訓練結果如下...</li>
+                    <li class="list-group-item">內文 (訓練變化 影片)</li>
+                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                  </ul>
+                  <div class="card-footer">
+                    <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-CVAE" data-bs-toggle="dropdown" aria-expanded="false">
+                        其他模型訓練成果
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-CVAE">
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訓練結果cvae -->
+    <!-- 訓練結果cddim -->
+    <div class="modal fade" id="TrainingResult-CDDIM" tabindex="-1" aria-labelledby="CDDIM-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="CDDIM-ModalLabel">CDDIM訓練結果</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="card" style="width: 18rem; margin:0 auto;">
+                  <div class="card-header">
+                    CDDIM訓練結果
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">CDDIM的訓練結果如下...</li>
+                    <li class="list-group-item">內文 (訓練變化 影片)</li>
+                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                  </ul>
+                  <div class="card-footer">
+                    <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-CDDIM" data-bs-toggle="dropdown" aria-expanded="false">
+                        其他模型訓練成果
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-CDDIM">
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 訓練結果cddim -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
 </body>
 </html>
