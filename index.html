@@ -7,10 +7,6 @@
     <script type="text/javascript" src="src.js"></script>
     <link rel="icon" href="./docs/icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-<!--    <link href="bootstrap.css" rel="stylesheet">-->
-
-<!--    <script src="jquery.js"></script>-->
-<!--    <script src="bootstrap.js"></script>-->
 </head>
 <body style="background-color: #afd9ee">
     <!--作者跟前言 導覽列-->
@@ -31,7 +27,12 @@
         <div>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">關於此專題</a>
+                    <a class="navbar-brand" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 20 20">
+                          <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
+                          <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
+                        </svg>關於此專題
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -78,8 +79,13 @@
                                 <li><a class="dropdown-item" href="https://arxiv.org/abs/1703.10593" target="_blank">CycleGAN</a></li>
                                 <li><a class="dropdown-item" href="https://arxiv.org/abs/1312.6114" target="_blank">VAE</a></li>
                                 <li><a class="dropdown-item" href="https://arxiv.org/abs/2010.02502" target="_blank">DDIM</a></li>
-                                <li><hr class="dropdown-divider"></li> <!-- 水平線 -->
-                                <li>在成果報告的部分</li>
+                                <li><hr class="dropdown-divider"></li> <!-- 水平線 #page=2-->
+                                <li>成果報告中提及的模型</li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=13" target="_blank">Pix2Pix</a></li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=13" target="_blank">CGAN</a></li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=16" target="_blank">CycleGAN</a></li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=12" target="_blank">CVAE</a></li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=17" target="_blank">CDDIM</a></li>
                               </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -88,15 +94,32 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="./docs/pdf/112.pdf" target="_blank">專題報告完整文章 (pdf)</a></li>
+                                    <li><a class="dropdown-item" href="./docs/pdf/112.pdf" download>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="-2 1 20 20">
+                                          <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+                                          <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                        </svg>
+                                        專題報告完整文章下載
+                                    </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="https://forms.gle/xjD1N8Zz9Htnf5xdA" target="_blank">回饋表單</a></li>
-                                    <li><a class="dropdown-item" href="https://forms.gle/SKnACvV4qgkPPJZM7" target="_blank">錯誤回報</a></li>
+                                    <li><a class="dropdown-item" href="https://forms.gle/SKnACvV4qgkPPJZM7" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bug" viewBox="0 0 16 16">
+                                          <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A4.979 4.979 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A4.985 4.985 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623zM4 7v4a4 4 0 0 0 3.5 3.97V7H4zm4.5 0v7.97A4 4 0 0 0 12 11V7H8.5zM12 6a3.989 3.989 0 0 0-1.334-2.982A3.983 3.983 0 0 0 8 2a3.983 3.983 0 0 0-2.667 1.018A3.989 3.989 0 0 0 4 6h8z"/>
+                                        </svg>
+                                        錯誤回報
+                                    </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="mailto:ken54787845@gmail.com">寫信提問</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">專案Github</a>
+                                <a class="nav-link" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    專案Github
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -242,8 +265,15 @@
     </div>
     <div class="card text-center">
       <div class="card-body">
-        <footer class="card-text">&copy; 屏東大學智慧機器人學系四甲 專題報告</footer><br>
-        <a class="btn btn-primary" href="" target="_blank">回饋表單</a>
+        <footer class="card-text">&copy; 屏東大學智慧機器人學系四甲 專題報告<br>
+            <small>
+                網頁設計By 陳冠霖
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
+                  <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                </svg>
+            </small>
+        </footer><br>
+        <a class="btn btn-primary" href="https://forms.gle/xjD1N8Zz9Htnf5xdA" target="_blank">回饋表單</a>
         <a class="btn btn-primary" href="https://bootstrap5.hexschool.com/docs/5.0/getting-started/introduction/" target="_blank">陳冠霖開發網頁用的參考資料</a>
 
       </div>
@@ -263,9 +293,36 @@
                     Pix2Pix訓練結果
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Pix2Pix的訓練結果如下...</li>
-                    <li class="list-group-item">內文 (訓練變化 影片)</li>
-                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                    <li class="list-group-item">本研究之Pix2Pix生成訓練使用兩種不同的損失進行訓練，並得到了不同的結果。第一種是與原始論文相同的設定，即Pix2Pix的判別器損失函數使用二元交叉熵損失 (BCE Loss)；生成器的對抗損失使用二元交叉熵損失，對於圖片生成的判斷使用L1損失。
+                        第二種是多方嘗試後修改的設定，即Pix2Pix的判別器損失函數使用L2損失；生成器的對抗損失使用L2，對於圖片的判斷一樣使用L1損失。綜觀來說原始論文設定時訓練出來的圖片對於訓練資料集的生成會有肉眼可見的瑕疵；對於測試資料集的生成則較模糊。
+                        但使用修改過後的設定則對於訓練訓練集的擬合狀態較佳；對於測試資料集的生成則有一些瑕疵。<br>
+                        研究中所修改的方法對於訓練資料的生成如圖所示，可以看到在訓練中約20000次時生成器就幾乎學會生成訓練資料的分布了，但也因為這個高度擬合性所以在對於測試資料這些沒訓練過的圖片生成則會接近於訓練資料集，也就是說生成器可能過度擬合而造成無法生成具有多樣性的結果。</li>
+                    <li class="list-group-item"><strong>Training Process (Bce+L1)</strong><br>
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/Pix2Pix/BCE+L1/predict.png">
+                            <source src="docs/result/Pix2Pix/BCE+L1/training_process.mp4" type="video/mp4">
+<!--                            <a href="docs/Pix2Pix/BCE+L1/training_process.mp4"></a>-->
+                        </video>
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失 (Bce+L1)</strong><br>
+                        此模型使用Bce Loss + L1 Loss的訓練對抗損失如下圖所示。<br>
+                        <img src="docs/result/Pix2Pix/BCE+L1/pix2pix loss.png" width="250" height="200"><br>
+                        另外訓練像素損失如下圖所示。<br>
+                        <img src="docs/result/Pix2Pix/BCE+L1/pix2pix loss mae.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失 (L2+L1)</strong><br>
+                        此模型使用L2 Loss + L1 Loss的訓練對抗損失如下圖所示。<br>
+<!--                        <img src="docs/Pix2Pix/BCE+L1/pix2pix loss.png" width="250" height="200"><br>-->
+                        另外訓練像素損失如下圖所示。<br>
+<!--                        <img src="docs/Pix2Pix/BCE+L1/pix2pix loss mae.png" width="250" height="200"><br>-->
+                    </li>
+                    <li class="list-group-item"><strong>預測結果 (Bce+L1)</strong><br>
+                        此模型使用Bce Loss + L1 Loss對於測試資料集的預測結果如下。<br>
+                        <img src="docs/result/Pix2Pix/BCE+L1/predict.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item"><strong>預測結果 (L2+L1)</strong><br>
+                        此模型使用L2 Loss + L1 Loss對於測試資料集的預測結果如下。<br>
+<!--                        <img src="docs/Pix2Pix/BCE+L1/predict.png" width="250" height="200"><br>-->
+                    </li>
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
@@ -423,9 +480,19 @@
                     CDDIM訓練結果
                   </div>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">CDDIM的訓練結果如下...</li>
-                    <li class="list-group-item">內文 (訓練變化 影片)</li>
-                    <li class="list-group-item">內文 (損失、可以看tf官網如何展示)</li>
+                    <li class="list-group-item">先前使用擴散模型訓練別的資料集時資料及數量都為50000筆到60000筆，而本研究之訓練資料集僅有400筆，就算使用資料擴增之後的2400筆資料似乎對於訓練的效果都不太好。
+                        另外訓練中發現使用解析度256×256的訓練資料對於運算的負擔太大，故未來會將資料解析度重整為64×64再進行訓練。
+                        目前訓練成果在一般無條件生成時就已經無法生成出良好的結果，訓練過程時所生成的結果如圖所示。
+                        未來會繼續探討模型架構對於訓練生成造成的影響並再加入條件控制。<br>
+                        <!-- 影片 -->
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失</strong><br>
+                        目前訓練之損失函數變化如圖 10所示，其中n_loss曲線代表對於模型生成的雜訊損失、i_loss曲線為圖片生成之像素誤差、kid曲線是對於驗證資料集的KID分數計算，訓練時模型只根據n_loss進行梯度計算與反向傳播。
+                        由圖可知KID分數呈現震盪不穩的狀態，但其他損失卻有收斂，現階段本研究認為最於雜訊的生成模型可能已經學習到對應雜訊，但是在逆向擴散中因為沒有良好的學習到圖片的特徵等結果，所以在逆向擴散生成圖片時才會無法良好的生成正確的圖片。
+                        未來本研究會再嘗試透過降低解析度以換取更多一次訓練的批次量、使用資料增強生成更多資料等方式來實驗並分析結果。<br>
+                        <img src="docs/result/CDDIM/loss.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item">內文 (訓練變化 影片 預測圖片)</li>
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
@@ -449,7 +516,6 @@
       </div>
     </div>
     <!-- 訓練結果cddim -->
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
