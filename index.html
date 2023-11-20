@@ -265,9 +265,9 @@
               <option selected value="請選擇生成模型">請選擇要使用的生成模型</option>
               <option value="Pix2Pix">Pix2Pix</option>
               <option value="CGAN">CGAN</option>
-              <option value="CycleGAN">CycleGAN</option>
-              <option value="VAE">VAE</option>
-              <option value="CDDIM">CDDIM</option>
+              <option value="Cycle-GAN">Cycle-GAN</option>
+              <option value="CVAE">CVAE</option>
+<!--              <option value="CDDIM">CDDIM</option>-->
             </select>
             <label for="selected-model">目前使用的模型</label>
         </div>
@@ -378,37 +378,37 @@
                         <img src="docs/result/Pix2Pix/L2+L1/predict.png" width="250" height="250"><br>
                     </li>
                     <li class="list-group-item"><strong>模型評估數據</strong><br>
-                        此模型使用L2 Loss + L1 Loss對於測試資料集的預測結果如下。<br>
+                        此模型在使用不同目標函數對於測試資料集的生成結果之評估分數如下。<br>
                         <table class="table">
                           <thead>
-                            <tr class="table-primary">
+                            <tr>
                               <th scope="col">#</th>
                               <th scope="col">L2+L1</th>
                               <th scope="col">Bce+L1</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="table-info">
+                            <tr>
                               <th scope="row">PSNR</th>
                               <td>23.725</td>
                               <td>13.675</td>
                             </tr>
-                            <tr class="table-primary">
+                            <tr>
                               <th scope="row">SSIM</th>
                               <td>0.588</td>
                               <td>0.228</td>
                             </tr>
-                            <tr class="table-info">
+                            <tr>
                               <th scope="row">FID</th>
                               <td>4.453</td>
                               <td>14.063</td>
                             </tr>
-                            <tr class="table-primary">
+                            <tr>
                               <th scope="row">KID</th>
                               <td>0.027</td>
                               <td>0.329</td>
                             </tr>
-                            <tr class="table-info">
+                            <tr>
                               <th scope="row">LPIPS<br></th>
                               <td>0.186</td>
                               <td>0.431</td>
@@ -575,23 +575,68 @@
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">先前使用擴散模型訓練別的資料集時資料及數量都為50000筆到60000筆，而本研究之訓練資料集僅有400筆，就算使用資料擴增之後的2400筆資料似乎對於訓練的效果都不太好。
                         另外訓練中發現使用解析度256×256的訓練資料對於運算的負擔太大，故未來會將資料解析度重整為64×64再進行訓練。
-                        目前訓練成果在一般無條件生成時就已經無法生成出良好的結果，訓練過程時所生成的結果如圖所示。
+                        目前使用256×256解析度訓練成果在一般無條件生成時就已經無法生成出良好的結果，訓練過程時所生成的結果如圖所示。不過使用64×64的解析度訓練時因為圖片特徵細節較少故訓練結果比較好。
                         未來會繼續探討模型架構對於訓練生成造成的影響並再加入條件控制。<br>
                     </li>
-                    <li class="list-group-item"><strong>Training Process</strong><br>
+                    <li class="list-group-item"><strong>Training Process (256px)</strong><br>
                         <video controls width="250" height="250" loop="loop" poster="docs/result/CDDIM/predict.png">
                             <source src="docs/result/CDDIM/training_process.mp4" type="video/mp4">
                         </video>
                     </li>
-                    <li class="list-group-item"><strong>訓練損失</strong><br>
+                    <li class="list-group-item"><strong>Training Process (64px)</strong><br>
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/CDDIM/predict64.png">
+                            <source src="docs/result/CDDIM/training_process64.mp4" type="video/mp4">
+                        </video>
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失 (256px)</strong><br>
                         目前訓練之損失函數變化如下圖所示，其中Noise Loss曲線代表對於模型生成的雜訊損失、Image Loss曲線為圖片生成之像素誤差、KID曲線是對於驗證資料集的KID分數計算，訓練時模型只根據Noise Loss進行梯度計算與反向傳播。
                         由圖可知KID分數呈現震盪不穩的狀態，但其他損失卻有收斂，現階段本研究認為最於雜訊的生成模型可能已經學習到對應雜訊，但是在逆向擴散中因為沒有良好的學習到圖片的特徵等結果，所以在逆向擴散生成圖片時才會無法良好的生成正確的圖片。
                         未來本研究會再嘗試透過降低解析度以換取更多一次訓練的批次量、使用資料增強生成更多資料等方式來實驗並分析結果。<br>
                         <img src="docs/result/CDDIM/loss.png" width="250" height="200"><br>
                     </li>
-                    <li class="list-group-item"><strong>預測結果</strong><br>
-                        此模型對於測試資料集的預測結果如下。目前生成之圖片尚不能辨識，未來會嘗試使用更多模型架構去進行訓練。<br>
+                    <li class="list-group-item"><strong>訓練損失 (64px)</strong><br>
+                        <img src="docs/result/CDDIM/loss64.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item"><strong>預測結果 (256px)</strong><br>
+                        此模型在256×256解析度下對於測試資料集的預測結果如下圖。目前生成之圖片尚不能辨識，未來會嘗試使用更多模型架構去進行訓練。<br>
                         <img src="docs/result/CDDIM/predict.png" width="250" height="130"><br>
+                    </li>
+                    <li class="list-group-item"><strong>預測結果 (64px)</strong><br>
+                        此模型在64×64解析度下對於測試資料集的預測結果如下。生成圖片辨識度較高，但因為圖片本身解析度低，所以成果仍舊較模糊。<br>
+                        <img src="docs/result/CDDIM/predict64.png" width="250" height="130"><br>
+                    </li>
+                    <li class="list-group-item"><strong>模型評估數據</strong><br>
+                        DDIM模型在64×64解析度之生成結果的評估分數如下<br>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">64px</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">PSNR</th>
+                              <td>2.346</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SSIM</th>
+                              <td>-0.004</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">FID</th>
+                              <td>18.462</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">KID</th>
+                              <td>0.264</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">LPIPS<br></th>
+                              <td>0.439</td>
+                            </tr>
+                          </tbody>
+                        </table>
                     </li>
                   </ul>
                   <div class="card-footer">
