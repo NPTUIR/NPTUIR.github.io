@@ -26,7 +26,12 @@ function transfer_RealImage(){
         img.onload = function() {
           context.drawImage(img, 0, 0);
         };
-
+    }
+    else if (UsedModel==="CVAE"){
+        img.src = img.src.replace('sketchdata', 'generated_data/CVAE');
+        img.onload = function() {
+          context.drawImage(img, 0, 0);
+        };
     }
     else{
         alert(UsedModel);
