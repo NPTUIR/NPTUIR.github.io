@@ -43,10 +43,10 @@
                                 訓練結果
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal">CDDIM (陳冠霖)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-DDIM" data-bs-toggle="modal">DDIM (陳冠霖)</a></li>
                                     <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal">CGAN (莊佩蓁)</a></li>
                                     <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal">CVAE (謝昕諺)</a></li>
-                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal">CycleGAN (何杰懋)</a></li>
+                                    <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal">CycleGAN (何杰懋 & 陳冠霖)</a></li>
                                     <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal">Pix2Pix (陳冠霖)</a></li>
                                 </ul>
                             </li>
@@ -112,7 +112,7 @@
                                 <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=13" target="_blank">CGAN</a></li>
                                 <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=16" target="_blank">CycleGAN</a></li>
                                 <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=12" target="_blank">CVAE</a></li>
-                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=17" target="_blank">CDDIM</a></li>
+                                <li><a class="dropdown-item" href="./docs/pdf/112.pdf#page=17" target="_blank">DDIM</a></li>
                               </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -267,7 +267,7 @@
               <option value="CGAN">CGAN</option>
               <option value="Cycle-GAN">Cycle-GAN</option>
               <option value="CVAE">CVAE</option>
-<!--              <option value="CDDIM">CDDIM</option>-->
+<!--              <option value="DDIM">DDIM</option>-->
             </select>
             <label for="selected-model">目前使用的模型</label>
         </div>
@@ -326,7 +326,7 @@
             </small>
         </footer><br>
         <a class="btn btn-primary" href="https://forms.gle/xjD1N8Zz9Htnf5xdA" target="_blank">回饋表單</a>
-        <a class="btn btn-primary" href="https://bootstrap5.hexschool.com/docs/5.0/getting-started/introduction/" target="_blank">陳冠霖開發網頁用的參考資料</a>
+<!--        <a class="btn btn-primary" href="https://bootstrap5.hexschool.com/docs/5.0/getting-started/introduction/" target="_blank">陳冠霖開發網頁用的參考資料</a>-->
       </div>
     </div>
     <!-- 訓練結果pix2pix -->
@@ -426,7 +426,7 @@
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
-                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-DDIM" data-bs-toggle="modal" data-bs-dismiss="modal">DDIM</a></li>
                       </ul>
                     </div>
                   </div>
@@ -454,8 +454,52 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">CGAN的訓練結果如下...</li>
-                    <li class="list-group-item">內文 (待新增)</li>
-                    <li class="list-group-item">內文 (待新增)</li>
+                    <li class="list-group-item"><strong>Training Process</strong><br>
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/CGAN/predict.png">
+                            <source src="docs/result/CGAN/training_process.mp4" type="video/mp4">
+                        </video>
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失</strong><br>
+                        CGAN模型的訓練對抗損失如下圖所示。我們為了使圖表更加可視，將損失結果取了對數，使最大最小值差距不會過大。<br>
+                        <img src="docs/result/CGAN/loss.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item"><strong>預測結果</strong><br>
+                        CGAN模型對於測試資料集的預測結果如下，由圖可知CGAN模型作為基礎的條件式生成模型在圖像風格變換之生成上無法順利學習到如何生成照片，且生成器與判別器訓練時非常容易失衡。<br>
+                        <img src="docs/result/CGAN/predict.png" width="250" height="250"><br>
+                    </li>
+                    <li class="list-group-item"><strong>模型評估數據</strong><br>
+                        CGAN模型在訓練後之生成結果的評估分數如下<br>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">CGAN</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">PSNR</th>
+                              <td>7.492</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SSIM</th>
+                              <td>0.124</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">FID</th>
+                              <td>16.111</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">KID</th>
+                              <td>0.443</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">LPIPS<br></th>
+                              <td>0.696</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </li>
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
@@ -466,7 +510,7 @@
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
-                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-DDIM" data-bs-toggle="modal" data-bs-dismiss="modal">DDIM</a></li>
                       </ul>
                     </div>
                   </div>
@@ -494,8 +538,56 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">CycleGAN的訓練結果如下...</li>
-                    <li class="list-group-item">內文 (待新增)</li>
-                    <li class="list-group-item">內文 (待新增)</li>
+                    <li class="list-group-item"><strong>Training Process</strong><br>
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/Cycle-GAN/predict.png">
+                            <source src="docs/result/Cycle-GAN/training_process.mp4" type="video/mp4">
+                        </video>
+                    </li>
+                    <li class="list-group-item"><strong>訓練損失</strong><br>
+                        Cycle-GAN模型的訓練對抗損失如下圖所示。我們為了使圖表更加可視，將損失結果取了對數，使最大最小值差距不會過大。<br>
+                        <img src="docs/result/Cycle-GAN/ADVloss.png" width="250" height="200"><br>
+                        另外循環一致性損失(Cycle Consistency Loss)如下圖所示。<br>
+                        <img src="docs/result/Cycle-GAN/Cycloss.png" width="250" height="200"><br>
+                        最後身分損失(Identity Loss)如下圖所示。<br>
+                        <img src="docs/result/Cycle-GAN/idenloss.png" width="250" height="200"><br>
+                    </li>
+                    <li class="list-group-item"><strong>預測結果</strong><br>
+                        Cycle-GAN對於測試資料集的預測結果如下。<br>
+                        <img src="docs/result/Cycle-GAN/predict.png" width="250" height="250"><br>
+                    </li>
+                    <li class="list-group-item"><strong>模型評估數據</strong><br>
+                        Cycle-GAN模型在訓練後之生成結果的評估分數如下<br>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Cycle-GAN</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">PSNR</th>
+                              <td>9.812</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SSIM</th>
+                              <td>0.055</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">FID</th>
+                              <td>0.14</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">KID</th>
+                              <td>0.899</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">LPIPS<br></th>
+                              <td>0.375</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </li>
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
@@ -506,7 +598,7 @@
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CVAE" data-bs-toggle="modal" data-bs-dismiss="modal">CVAE</a></li>
-                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-DDIM" data-bs-toggle="modal" data-bs-dismiss="modal">DDIM</a></li>
                       </ul>
                     </div>
                   </div>
@@ -536,6 +628,39 @@
                     <li class="list-group-item">CVAE的訓練結果如下...</li>
                     <li class="list-group-item">內文 (待新增)</li>
                     <li class="list-group-item">內文 (待新增)</li>
+                    <li class="list-group-item"><strong>模型評估數據</strong><br>
+                        CVAE模型在訓練後之生成結果的評估分數如下<br>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">CVAE</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">PSNR</th>
+                              <td>14.387</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">SSIM</th>
+                              <td>0.3</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">FID</th>
+                              <td>6.64</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">KID</th>
+                              <td>0.227</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">LPIPS<br></th>
+                              <td>0.355</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </li>
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
@@ -546,7 +671,7 @@
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
-                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-CDDIM" data-bs-toggle="modal" data-bs-dismiss="modal">CDDIM</a></li>
+                        <li><a class="dropdown-item" data-bs-target="#TrainingResult-DDIM" data-bs-toggle="modal" data-bs-dismiss="modal">DDIM</a></li>
                       </ul>
                     </div>
                   </div>
@@ -559,18 +684,18 @@
       </div>
     </div>
     <!-- 訓練結果cvae -->
-    <!-- 訓練結果cddim -->
-    <div class="modal fade" id="TrainingResult-CDDIM" tabindex="-1" aria-labelledby="CDDIM-ModalLabel" aria-hidden="true">
+    <!-- 訓練結果DDIM -->
+    <div class="modal fade" id="TrainingResult-DDIM" tabindex="-1" aria-labelledby="DDIM-ModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="CDDIM-ModalLabel">CDDIM訓練結果</h5>
+            <h5 class="modal-title" id="DDIM-ModalLabel">DDIM訓練結果</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
               <div class="card" style="width: 18rem; margin:0 auto;">
                   <div class="card-header">
-                    CDDIM訓練結果
+                    DDIM訓練結果
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">先前使用擴散模型訓練別的資料集時資料及數量都為50000筆到60000筆，而本研究之訓練資料集僅有400筆，就算使用資料擴增之後的2400筆資料似乎對於訓練的效果都不太好。
@@ -579,31 +704,31 @@
                         未來會繼續探討模型架構對於訓練生成造成的影響並再加入條件控制。<br>
                     </li>
                     <li class="list-group-item"><strong>Training Process (256px)</strong><br>
-                        <video controls width="250" height="250" loop="loop" poster="docs/result/CDDIM/predict.png">
-                            <source src="docs/result/CDDIM/training_process.mp4" type="video/mp4">
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/DDIM/predict.png">
+                            <source src="docs/result/DDIM/training_process.mp4" type="video/mp4">
                         </video>
                     </li>
                     <li class="list-group-item"><strong>Training Process (64px)</strong><br>
-                        <video controls width="250" height="250" loop="loop" poster="docs/result/CDDIM/predict64.png">
-                            <source src="docs/result/CDDIM/training_process64.mp4" type="video/mp4">
+                        <video controls width="250" height="250" loop="loop" poster="docs/result/DDIM/predict64.png">
+                            <source src="docs/result/DDIM/training_process64.mp4" type="video/mp4">
                         </video>
                     </li>
                     <li class="list-group-item"><strong>訓練損失 (256px)</strong><br>
                         目前訓練之損失函數變化如下圖所示，其中Noise Loss曲線代表對於模型生成的雜訊損失、Image Loss曲線為圖片生成之像素誤差、KID曲線是對於驗證資料集的KID分數計算，訓練時模型只根據Noise Loss進行梯度計算與反向傳播。
                         由圖可知KID分數呈現震盪不穩的狀態，但其他損失卻有收斂，現階段本研究認為最於雜訊的生成模型可能已經學習到對應雜訊，但是在逆向擴散中因為沒有良好的學習到圖片的特徵等結果，所以在逆向擴散生成圖片時才會無法良好的生成正確的圖片。
                         未來本研究會再嘗試透過降低解析度以換取更多一次訓練的批次量、使用資料增強生成更多資料等方式來實驗並分析結果。<br>
-                        <img src="docs/result/CDDIM/loss.png" width="250" height="200"><br>
+                        <img src="docs/result/DDIM/loss.png" width="250" height="200"><br>
                     </li>
                     <li class="list-group-item"><strong>訓練損失 (64px)</strong><br>
-                        <img src="docs/result/CDDIM/loss64.png" width="250" height="200"><br>
+                        <img src="docs/result/DDIM/loss64.png" width="250" height="200"><br>
                     </li>
                     <li class="list-group-item"><strong>預測結果 (256px)</strong><br>
                         此模型在256×256解析度下對於測試資料集的預測結果如下圖。目前生成之圖片尚不能辨識，未來會嘗試使用更多模型架構去進行訓練。<br>
-                        <img src="docs/result/CDDIM/predict.png" width="250" height="130"><br>
+                        <img src="docs/result/DDIM/predict.png" width="250" height="130"><br>
                     </li>
                     <li class="list-group-item"><strong>預測結果 (64px)</strong><br>
                         此模型在64×64解析度下對於測試資料集的預測結果如下。生成圖片辨識度較高，但因為圖片本身解析度低，所以成果仍舊較模糊。<br>
-                        <img src="docs/result/CDDIM/predict64.png" width="250" height="130"><br>
+                        <img src="docs/result/DDIM/predict64.png" width="250" height="130"><br>
                     </li>
                     <li class="list-group-item"><strong>模型評估數據</strong><br>
                         DDIM模型在64×64解析度之生成結果的評估分數如下<br>
@@ -641,10 +766,10 @@
                   </ul>
                   <div class="card-footer">
                     <div class="dropdown">
-                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-CDDIM" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink-DDIM" data-bs-toggle="dropdown" aria-expanded="false">
                         其他模型訓練成果
                       </a>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-CDDIM">
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-DDIM">
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-Pix2Pix" data-bs-toggle="modal" data-bs-dismiss="modal">Pix2Pix</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CGAN</a></li>
                         <li><a class="dropdown-item" data-bs-target="#TrainingResult-CycleGAN" data-bs-toggle="modal" data-bs-dismiss="modal">CycleGAN</a></li>
@@ -660,7 +785,7 @@
         </div>
       </div>
     </div>
-    <!-- 訓練結果cddim -->
+    <!-- 訓練結果DDIM -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
 </body>
