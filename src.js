@@ -33,6 +33,18 @@ function transfer_RealImage(){
           context.drawImage(img, 0, 0);
         };
     }
+    else if (UsedModel==="Cycle-GAN"){
+        img.src = img.src.replace('sketchdata', 'generated_data/Cycle-GAN');
+        img.onload = function() {
+          context.drawImage(img, 0, 0);
+        };
+    }
+    else if (UsedModel==="CGAN"){
+        img.src = img.src.replace('sketchdata', 'generated_data/CGAN');
+        img.onload = function() {
+          context.drawImage(img, 0, 0);
+        };
+    }
     else{
         alert(UsedModel);
         for (let i = 0; i < RealImage.data.length; i += 4) {
